@@ -80,7 +80,7 @@ function arg(a, b, c){
     return (a+b)/c;
   }
   else if(a === undefined && b === undefined && c === undefined){
-    return false
+    return false;
   }
   else{
     return null;
@@ -88,4 +88,10 @@ function arg(a, b, c){
 }
 
 // Invoque a função acima utilizando todas as possibilidades (com nenhum argumento, com um, com dois e com três.) Coloque um comentário de linha ao lado da função com o resultado de cada invocação.
-console.log(arg())
+console.log(arg());
+console.log(arg(1));
+console.log(arg(1,2));
+console.log(arg(1,2,3));
+
+
+
