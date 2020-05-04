@@ -126,9 +126,8 @@
   https://regex101.com/#javascript e verifique se as capturas estão
   corretas, para depois aplicar no código ;)
   */
- //([A-Z]í\w+\s\w+\s\wá\w+)
- //([A-Z]\w+\sé\s\w+\s\w+á\w+)
- //([A-Z]\w+é)
+ 
+ //<(\w+)>.+?<\/\w+>
   console.log('\nFazer replace dos textos das tags:');
   var newText3 = '<h1>Título da página</h1><p>Este é um parágrafo</p><footer>Rodapé</footer>';
   var tags = newText3.replace(/<(\w+)>([^<]+)<\/\w+>/g, '<$1>O texto dentro da tag "$1" é "$2"</$1> \n');
