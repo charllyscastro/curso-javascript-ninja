@@ -25,6 +25,79 @@
   input;
   - Ao pressionar o botão "CE", o input deve ficar zerado.
   */
+  var $visor = doc.querySelector('[data-js="visor"]');
+  var $buttonNumbers = doc.querySelectorAll('[data-js="button-number"]');
+  var $buttonOperation = doc.querySelectorAll('[data-js="button-operation"]');
+  var $buttonCE = doc.querySelector('[data-js="button-ce"]');
+  var $buttonEqual = doc.querySelector('[data-js="button-equal"]');
+
+
+  Array.prototype.forEach.call($buttonNumbers, function(button){
+    button.addEventListener('click', handClickNumber, false);
+  });
+
+  Array.prototype.forEach.call($buttonOperation, function(button){
+    button.addEventListener('click',  handClickOperation, false);
+  });
+
+  $buttonCE.addEventListener('click', handClickCE, false);
+  $buttonEqual.addEventListener('click', handClickEqual, false);
+
+  function handClickNumber(){
+    $visor.value += this.value;
+  }
+
+  function handClickOperation(){
+    $visor.value = removeLastItemAndOperator($visor.value);
+
+    $visor.value += this.value;
+  }
+
+  function removeLastItemAndOperator(number){
+    if(isLastItemAndOperation(number)){
+      return number.slice(0, -1);
+    }
+    return number;
+  }
+
+  function isLastItemAndOperation(number){
+    var operations = ['+', '-', 'x','÷'];
+    var lastItem = number.split('').pop();
+      return operations.some(function(operator){
+        return operator === lastItem;
+      })
+  }
+
+  function handClickCE(){
+    $visor.value = 0;
+  }
+
+  function handClickEqual(){
+    $visor.value = removeLastItemAndOperator($visor.value);
+    console.log($visor.value)
+    var allValues = $visor.value.match(/\d+[+x÷-]?/g);
+    $visor.value = allValues.reduce(function(accumulated, actual){
+      var firstValue = accumulated.slice(0,-1);
+      var operator = accumulated.split('').pop();
+      var lastValue = removeLastItemAndOperator(actual);
+      var lastOperator = isLastItemAndOperation(actual) ? actual.split('').pop() : '';
+      console.log(lastValue)
+      switch(operator){
+        case '+':
+          return (Number(firstValue) + Number(lastValue)) + lastOperator;
+        case '-':
+          return (Number(firstValue) - Number(lastValue)) + lastOperator;
+        case 'x':
+          return (Number(firstValue) * Number(lastValue)) + lastOperator;
+        case '÷':
+          return (Number(firstValue) / Number(lastValue)) + lastOperator;
+      }
+    })
+
+
+  }
+
+
 
 
  })(window, document);
