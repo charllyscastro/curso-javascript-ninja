@@ -1,3 +1,6 @@
+(function(win, doc){
+  'use strict';
+
 /*
 Essa semana você terá dois desafios:
 1) Revisar todo o contéudo passado até aqui, e ver se você realmente entendeu
@@ -14,3 +17,21 @@ https://developer.mozilla.org/en-US/docs/Web/Events#Categories
 Tente aplicar na prática alguns dos eventos que estão ali e coloque nesse
 desafio os experimentos legais que você conseguir desenvolver :D
 */
+
+
+
+function padraoDeClick(tag, event, callback ){
+  document.querySelector(tag).addEventListener(event, callback, false);
+}
+
+padraoDeClick('[data-js="div"]', 'click', function(event){
+  event.preventDefault;
+  alert('clicou na div');
+});
+
+padraoDeClick('[data-js="a"]', 'click', function(){
+  alert('clicou no a');
+});
+
+
+}(window, document));
